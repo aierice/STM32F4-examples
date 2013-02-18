@@ -79,6 +79,8 @@ int main(void){
 	
 	uint8_t received_val = 0;
 	
+	init_SPI1();
+	
 	while(1){
 		
 		GPIOE->BSRRH |= GPIO_Pin_7; // set PE7 (CS) low
