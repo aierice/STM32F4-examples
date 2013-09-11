@@ -132,12 +132,12 @@ int main(void){
 	
 	while(1){
 		
-		I2C_start(I2C1, SLAVE_ADDRESS, I2C_Direction_Transmitter); // start a transmission in Master transmitter mode
+		I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Transmitter); // start a transmission in Master transmitter mode
 		I2C_write(I2C1, 0x20); // write one byte to the slave
 		I2C_write(I2C1, 0x03); // write another byte to the slave
 		I2C_stop(I2C1); // stop the transmission
 		
-		I2C_start(I2C1, SLAVE_ADDRESS, I2C_Direction_Receiver); // start a transmission in Master receiver mode
+		I2C_start(I2C1, SLAVE_ADDRESS<<1, I2C_Direction_Receiver); // start a transmission in Master receiver mode
 		received_data[0] = I2C_read_ack(I2C1); // read one byte and request another byte
 		received_data[1] = I2C_read_nack(I2C1); // read one byte and don't request another byte
 		I2C_stop(I2C1); // stop the transmission
