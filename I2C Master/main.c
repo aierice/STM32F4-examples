@@ -89,7 +89,7 @@ void I2C_write(I2C_TypeDef* I2Cx, uint8_t data){
 	// wait for data byte being copied from DR to shift register (EV8) and 
 	// write next byte to SD --> less waiting time for CPU
 	while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
-	I2C_SendData(I2Cx, data):
+	I2C_SendData(I2Cx, data);
 }
 
 /* This function reads one byte from the slave device 
