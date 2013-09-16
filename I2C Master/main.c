@@ -84,12 +84,11 @@ void I2C_start(I2C_TypeDef* I2Cx, uint8_t address, uint8_t direction){
  *		I2Cx --> the I2C peripheral e.g. I2C1 
  *		data --> the data byte to be transmitted
  */
-void I2C_write(I2C_TypeDef* I2Cx, uint8_t data){
-	// fix suggested by iwasz
-	// wait for data byte being copied from DR to shift register (EV8) and 
-	// write next byte to SD --> less waiting time for CPU
-	while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTING));
+void I2C_write(I2C_TypeDef* I2Cx, uint8_t data)
+{
 	I2C_SendData(I2Cx, data);
+	// wait for I2C1 EV8_2 --> byte has been transmitted
+	while(!I2C_CheckEvent(I2Cx, I2C_EVENT_MASTER_BYTE_TRANSMITTED));
 }
 
 /* This function reads one byte from the slave device 
